@@ -4,6 +4,11 @@ namespace PulseActiveShop.Core.Entities
 {
     public class Product : BaseEntity, IAggregateRoot
     {
+        public Product()
+        {
+
+        }
+
         public Product(
             string name, 
             string description, 
@@ -24,19 +29,19 @@ namespace PulseActiveShop.Core.Entities
             ProductBrand = productBrand;
         }
 
-        public string Name { get; private set; }
+        public string? Name { get; private set; }
 
-        public string Description { get; private set; }
+        public string? Description { get; private set; }
 
-        public decimal Price { get; private set; }
+        public decimal? Price { get; private set; }
 
-        public string PictureUri { get; private set; }
+        public string? PictureUri { get; private set; }
 
-        public int ProductTypeId { get; private set; }
+        public int? ProductTypeId { get; private set; }
 
         public ProductType? ProductType { get; private set; }
 
-        public int ProductBrandId { get; private set; }
+        public int? ProductBrandId { get; private set; }
 
         public ProductBrand? ProductBrand { get; private set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace PulseActiveShop.Dal.Sql.Entities
 {
-    internal class ProductType : BaseDalEntity
+    public class ProductType : BaseDalEntity
     {
     }
 }
