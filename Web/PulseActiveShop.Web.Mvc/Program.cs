@@ -12,6 +12,9 @@ namespace PulseActiveShop.Web.Mvc
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            // Add Mediatr package for handling the communication with the API
+            builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
             WebApplication app = builder.Build();
 
             // Configure the HTTP request pipeline.
