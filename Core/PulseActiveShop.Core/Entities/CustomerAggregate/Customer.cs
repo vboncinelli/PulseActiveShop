@@ -1,19 +1,22 @@
-﻿using PulseActiveShop.Core.Interfaces;
+﻿using PulseActiveShop.Core.Interfaces.Core;
 
 namespace PulseActiveShop.Core.Entities;
 
 public class Customer : BaseEntity, IAggregateRoot
 {
-    public string IdentityGuid { get; private set; }
+    public User User { get; private set; }
 
     private List<PaymentMethod> _paymentMethods = new();
 
     public IEnumerable<PaymentMethod> PaymentMethods => _paymentMethods.AsReadOnly();
 
-    public Customer(string identity)
+    public Customer(User user)
     {
-        // TODO: Check for null or empty string before assigning the value
+        User = user ?? throw new ArgumentNullException(nameof(user));
+    }
 
-        IdentityGuid = identity;
+    public void AddPaymentMethod(PaymentMethod paymentMethod)
+    {
+        this._paymentMethods.Add(paymentMethod);
     }
 }

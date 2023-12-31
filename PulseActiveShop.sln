@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PulseActiveShop.Web.Mvc", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PulseActiveShop.Core", "Core\PulseActiveShop.Core\PulseActiveShop.Core.csproj", "{97023B07-6260-4F0E-81FA-4DD0A69EEC2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulseActiveShop.Application.Services", "Core\PulseActiveShop.Application.Services\PulseActiveShop.Application.Services.csproj", "{B27A8528-C01E-4B76-A95B-55CE3F0D4B0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{97023B07-6260-4F0E-81FA-4DD0A69EEC2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97023B07-6260-4F0E-81FA-4DD0A69EEC2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97023B07-6260-4F0E-81FA-4DD0A69EEC2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B27A8528-C01E-4B76-A95B-55CE3F0D4B0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B27A8528-C01E-4B76-A95B-55CE3F0D4B0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B27A8528-C01E-4B76-A95B-55CE3F0D4B0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B27A8528-C01E-4B76-A95B-55CE3F0D4B0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 		{1F32A447-98BC-4B2F-86C0-7E6AA92BDD86} = {4520C712-5FB0-4355-8500-4183E19DE7F5}
 		{AAF9DB32-7C93-4B65-864A-9CF03CB5EBFB} = {6CB0B485-798D-4A14-924B-3CB8293ADEA3}
 		{97023B07-6260-4F0E-81FA-4DD0A69EEC2F} = {B6C531E3-90E7-4414-9412-240E300C788C}
+		{B27A8528-C01E-4B76-A95B-55CE3F0D4B0F} = {B6C531E3-90E7-4414-9412-240E300C788C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3EABC04-6662-4CB9-9BF0-3DFDC3F201FB}

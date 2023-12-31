@@ -1,4 +1,4 @@
-﻿using PulseActiveShop.Core.Interfaces;
+﻿using PulseActiveShop.Core.Interfaces.Core;
 namespace PulseActiveShop.Core.Entities
 {
     public class ProductBrand : BaseEntity, IAggregateRoot

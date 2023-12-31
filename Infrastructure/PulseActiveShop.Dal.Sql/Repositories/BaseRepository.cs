@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using PulseActiveShop.Core.Entities;
 using PulseActiveShop.Core.Exceptions;
-using PulseActiveShop.Core.Interfaces;
+using PulseActiveShop.Core.Interfaces.Repository;
 using PulseActiveShop.Dal.Sql.Contexts;
 using PulseActiveShop.Dal.Sql.Entities;
 using PulseActiveShop.Dal.Sql.Mappers;
@@ -10,9 +11,8 @@ using System.Linq.Expressions;
 
 namespace PulseActiveShop.Dal.Sql.Repositories
 {
-
-    public abstract class BaseRepository<TEntity, TEntityCollection, TDalEntity> : IRepository<TEntity, TEntityCollection> 
-        where TEntity : BaseEntity, new()
+    public abstract class BaseRepository<TEntity, TEntityCollection, TDalEntity> : IRepository<TEntity, TEntityCollection>
+        where TEntity:BaseEntity, new()
         where TEntityCollection : BaseEntityCollection<TEntity>, new()
         where TDalEntity : BaseDalEntity, new()
 
@@ -105,12 +105,30 @@ namespace PulseActiveShop.Dal.Sql.Repositories
         }
 
 
+        public virtual async Task<TEntityCollection> FilterAsync(int[] ids, int page = 1, int pageSize = int.MaxValue)
+        {
+            try
+            {
+                using (var context = this.GetContext())
+                {
+                    var query = context.Set<TDalEntity>().Where(e => ids.Contains(e.Id)).AsQueryable();
+
+                    return await ExecutePaginatedQueryAsync(query, page, pageSize, this._includedEntities);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(ex.Message, ex);
+            }
+        }
+
+
         /// <summary>
         /// Inserts an entity asynchronously.
         /// </summary>
         /// <param name="entity">The entity to insert.</param>
         /// <returns>The inserted entity.</returns>
-        public virtual async Task<TEntity> InsertAsync(TEntity entity)
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
             try
             {
@@ -212,7 +230,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
         /// </summary>
         /// <param name="collection">The collection of entities to insert.</param>
         /// <returns>A task that represents the asynchronous operation.</returns>
-        public virtual async Task InsertBulkAsync(TEntityCollection collection)
+        public virtual async Task AddBulkAsync(TEntityCollection collection)
         {
             try
             {
@@ -258,33 +276,6 @@ namespace PulseActiveShop.Dal.Sql.Repositories
             catch (Exception ex)
             {
                 throw new DataAccessException(ex.Message, ex);
-            }
-        }
-
-        /// <summary>
-        /// Filters the entities based on the provided where predicates, page number, page size, and optional order predicate.
-        /// </summary>
-        /// <param name="wherePredicates">The list of where predicates to filter the entities.</param>
-        /// <param name="page">The page number.</param>
-        /// <param name="pageSize">The page size.</param>
-        /// <param name="orderPredicate">The optional order predicate to order the entities.</param>
-        /// <returns>The filtered entity collection.</returns>
-        protected virtual async Task<TEntityCollection> FilterAsync(
-        List<Expression<Func<TDalEntity, bool>>> wherePredicates,
-        int page,
-        int pageSize,
-        Expression<Func<TDalEntity, string>>? orderPredicate = null)
-        {
-            using (var context = this.GetContext())
-            {
-                var query = context.Set<TDalEntity>().AsQueryable();
-
-                wherePredicates.ForEach(predicate =>
-                {
-                    query = ApplyWhereCondition(query, predicate);
-                });
-
-                return await ExecutePaginatedQueryAsync(query, page, pageSize, this._includedEntities, orderPredicate);
             }
         }
 
@@ -360,7 +351,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
         protected virtual DbContext GetContext()
         {
             var connectionString = this._configuration.GetConnectionString("PulseShop");
-            
+
             return new ShopContext(connectionString!);
         }
 

@@ -31,7 +31,39 @@ namespace PulseActiveShop.Dal.Sql.Contexts
             modelBuilder.Entity<Basket>(entity =>
             {
                 entity.ToTable("Basket");
+            });            
+            
+            modelBuilder.Entity<Basket>(entity =>
+            {
+                entity.ToTable("Basket");
+            });            
+            
+            modelBuilder.Entity<Basket>(entity =>
+            {
+                entity.ToTable("Basket");
+            });            
+            
+            modelBuilder.Entity<Basket>(entity =>
+            {
+                entity.ToTable("Basket");
+            });            
+            
+            modelBuilder.Entity<Basket>(entity =>
+            {
+                entity.ToTable("Basket");
+            });            
+            
+            modelBuilder.Entity<Basket>(entity =>
+            {
+                entity.ToTable("Basket");
+            });            
+            
+            modelBuilder.Entity<Basket>(entity =>
+            {
+                entity.ToTable("Basket");
             });
+
+
         }
     }
 }

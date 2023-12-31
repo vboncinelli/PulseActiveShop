@@ -1,4 +1,4 @@
-﻿using PulseActiveShop.Core.Interfaces;
+﻿using PulseActiveShop.Core.Interfaces.Core;
 
 namespace PulseActiveShop.Core.Entities
 {
@@ -11,6 +11,11 @@ namespace PulseActiveShop.Core.Entities
         public IReadOnlyCollection<BasketItem> Items => _items.AsReadOnly();
 
         public int TotalItems => _items.Sum(i => i.Quantity);
+
+        public Basket()
+        {
+
+        }
 
         public Basket(string customerId)
         {
@@ -37,5 +42,10 @@ namespace PulseActiveShop.Core.Entities
         public decimal ComputeTotalValue() => this._items.Sum(e => e.UnitPrice * e.Quantity);
 
         public void Clear() => this._items.Clear();
+    }
+
+    public class BasketCollection : BaseEntityCollection<Basket>
+    {
+
     }
 }
