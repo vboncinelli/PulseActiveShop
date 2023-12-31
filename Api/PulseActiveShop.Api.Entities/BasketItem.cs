@@ -13,7 +13,7 @@ namespace PulseActiveShop.Api.Entities
         [JsonPropertyName("products")]
         public Product? Product { get; set; }
 
-        [JsonPropertyName("basket")]
-        public Basket? Basket { get; set; }
+        [JsonPropertyName("basketId")]
+        public int? BasketId { get; set; }
     }
 }

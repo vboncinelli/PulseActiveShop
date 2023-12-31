@@ -11,4 +11,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\PulseActiveShop.Application.Services\PulseActiveShop.Application.Services.csproj" />
+    <ProjectReference Include="..\..\Core\PulseActiveShop.Core\PulseActiveShop.Core.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\PulseActiveShop.Dal.Sql\PulseActiveShop.Dal.Sql.csproj" />
+    <ProjectReference Include="..\PulseActiveShop.Api.Entities\PulseActiveShop.Api.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

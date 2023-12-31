@@ -1,6 +1,6 @@
 ﻿namespace PulseActiveShop.Dal.Sql.Entities
 {
-    internal class BasketItem : BaseDalEntity
+    public class BasketItem : BaseDalEntity
     {
         public decimal UnitPrice { get; set; }
 

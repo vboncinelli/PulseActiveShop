@@ -2,7 +2,7 @@
 {
     public class Order : BaseEntity
     {
-        public string? CustomerId { get; set; }
+        public int? CustomerId { get; set; }
 
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
 
@@ -15,7 +15,7 @@
 
         }
 
-        public Order(string? customerId, Address? shipToAddress, List<OrderItem> orderItems)
+        public Order(int? customerId, Address? shipToAddress, List<OrderItem> orderItems)
         {
             this.CustomerId = customerId;
             this.ShipToAddress = shipToAddress;

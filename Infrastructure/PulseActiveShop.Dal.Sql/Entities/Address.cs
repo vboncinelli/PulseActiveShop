@@ -1,10 +1,8 @@
 ﻿namespace PulseActiveShop.Dal.Sql.Entities
 {
-    internal class Address : BaseDalEntity
+    public class Address : BaseDalEntity
     {
-        public int UserId { get; set; }
-
-        public User? User { get; set; }
+        public int? UserId { get; set; }
 
         public string? Street { get; set; }
         

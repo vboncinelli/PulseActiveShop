@@ -3,4 +3,6 @@
     public class User : BaseEntity
     {
     }
+
+    public class UserCollection : BaseEntityCollection<User> { }
 }

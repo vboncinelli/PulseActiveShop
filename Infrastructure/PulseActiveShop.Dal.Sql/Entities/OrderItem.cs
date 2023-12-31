@@ -1,6 +1,6 @@
 ﻿namespace PulseActiveShop.Dal.Sql.Entities
 {
-    internal class OrderItem : BaseDalEntity
+    public class OrderItem : BaseDalEntity
     {
     }
 }

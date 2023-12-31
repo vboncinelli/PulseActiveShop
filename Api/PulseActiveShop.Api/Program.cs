@@ -1,4 +1,9 @@
 
+using PulseActiveShop.Application.Services;
+using PulseActiveShop.Core.Interfaces.Repository;
+using PulseActiveShop.Core.Interfaces.Services;
+using PulseActiveShop.Dal.Sql.Repositories;
+
 namespace PulseActiveShop.Api
 {
     public class Program
@@ -7,12 +12,14 @@ namespace PulseActiveShop.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
+            builder.Services.AddSingleton<IOrderService, OrderService>();
 
             var app = builder.Build();
 
@@ -26,7 +33,6 @@ namespace PulseActiveShop.Api
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

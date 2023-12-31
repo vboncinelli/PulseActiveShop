@@ -4,9 +4,6 @@ namespace PulseActiveShop.Api.Entities
 {
     public class Address : BaseApiEntity
     {
-        [JsonPropertyName("userId")]
-        public int UserId { get; set; }
-
         [JsonPropertyName("street")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Street { get; set; }
@@ -26,10 +23,5 @@ namespace PulseActiveShop.Api.Entities
         [JsonPropertyName("zipCode")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ZipCode { get; set; }
-    }
-
-    public class AddressCollection : BaseApiEntityCollection<Address>
-    {
-
     }
 }

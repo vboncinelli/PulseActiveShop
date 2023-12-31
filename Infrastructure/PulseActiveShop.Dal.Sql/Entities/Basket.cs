@@ -1,6 +1,6 @@
 ﻿namespace PulseActiveShop.Dal.Sql.Entities
 {
-    internal class Basket : BaseDalEntity
+    public class Basket : BaseDalEntity
     {
         public string? CustomerId { get; set; }
 
