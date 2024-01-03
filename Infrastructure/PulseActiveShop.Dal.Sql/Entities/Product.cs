@@ -17,5 +17,8 @@
         public int? BrandId { get; set; }
 
         public Brand? Brand { get; set; }
+
+        public virtual ICollection<BasketItem> BasketItems { get; set; } = new List<BasketItem>();
+
     }
 }
