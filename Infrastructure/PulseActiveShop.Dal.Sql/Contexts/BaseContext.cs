@@ -10,5 +10,14 @@ namespace PulseActiveShop.Dal.Sql.Contexts
         {
             this._connectionString = connectionString;
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(this._connectionString);
+
+            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+            optionsBuilder.EnableDetailedErrors();
+        }
     }
 }

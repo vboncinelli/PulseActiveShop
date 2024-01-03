@@ -1,4 +1,5 @@
-﻿using PulseActiveShop.Application.Services.Utilities;
+﻿using Microsoft.Extensions.Logging;
+using PulseActiveShop.Application.Services.Utilities;
 using PulseActiveShop.Core.Entities;
 using PulseActiveShop.Core.Exceptions;
 using PulseActiveShop.Core.Interfaces.Repository;
@@ -6,7 +7,7 @@ using PulseActiveShop.Core.Interfaces.Services;
 
 namespace PulseActiveShop.Application.Services
 {
-    public class OrderService : BaseService, IOrderService
+    public class OrderService : BaseService<Order, OrderCollection, OrderService>, IOrderService
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IProductRepository _productRepository;
@@ -17,7 +18,8 @@ namespace PulseActiveShop.Application.Services
             IOrderRepository orderRepository, 
             IProductRepository productRepository, 
             IBasketRepository basketRepository,
-            IUriComposer uriComposer)
+            IUriComposer uriComposer,
+            ILogger<OrderService> logger) : base(logger)
         {
             this._orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
             this._productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));

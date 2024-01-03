@@ -9,5 +9,7 @@ namespace PulseActiveShop.Core.Constants
     public static class ShopConstants
     {
         public static readonly int MAX_QUANTITY = 100;
+
+        public static readonly int USERNAME_MIN_LENGTH = 5;
     }
 }
