@@ -2,18 +2,18 @@
 
 namespace PulseActiveShop.Core.Entities;
 
-public class Customer : BaseEntity, IAggregateRoot
+public class Customer(User user) : BaseEntity, IAggregateRoot
 {
-    public User User { get; private set; }
+    // TODO: What C# 12 feature are we using here?
+    private readonly User _user = user ?? throw new ArgumentNullException(nameof(user));
 
     private List<PaymentMethod> _paymentMethods = new();
 
-    public IEnumerable<PaymentMethod> PaymentMethods => _paymentMethods.AsReadOnly();
+    public string? Username => _user.Username;
 
-    public Customer(User user)
-    {
-        User = user ?? throw new ArgumentNullException(nameof(user));
-    }
+    public string? Email => _user.Email;
+
+    public IEnumerable<PaymentMethod> PaymentMethods => _paymentMethods.AsReadOnly();
 
     public void AddPaymentMethod(PaymentMethod paymentMethod)
     {

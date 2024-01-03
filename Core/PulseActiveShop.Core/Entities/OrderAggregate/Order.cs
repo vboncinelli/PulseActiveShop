@@ -1,14 +1,17 @@
-﻿namespace PulseActiveShop.Core.Entities
+﻿using PulseActiveShop.Core.Interfaces.Core;
+
+namespace PulseActiveShop.Core.Entities
 {
-    public class Order : BaseEntity
+    public class Order : BaseEntity, IAggregateRoot
     {
-        public int? CustomerId { get; set; }
+        public int? CustomerId { get; private set; }
 
-        public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
+        public DateTime OrderDate { get; private set; } = DateTime.UtcNow;
 
-        public Address? ShipToAddress { get; set; }
+        public Address? ShipToAddress { get; private set; }
 
-        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public List<OrderItem> OrderItems { get; private set; } = new List<OrderItem>();
+
 
         public Order()
         {
@@ -20,6 +23,18 @@
             this.CustomerId = customerId;
             this.ShipToAddress = shipToAddress;
             this.OrderItems = orderItems;
+        }
+
+        public decimal GetTotal()
+        {
+            var total = 0m;
+
+            foreach (var item in this.OrderItems)
+            {
+                total += item.UnitPrice * item.Units;
+            }
+
+            return total;
         }
     }
 

@@ -2,5 +2,6 @@
 {
     public class Brand : BaseDalEntity
     {
+        public string? Name { get; set; }
     }
 }

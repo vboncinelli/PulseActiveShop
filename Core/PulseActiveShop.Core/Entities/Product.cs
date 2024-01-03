@@ -17,7 +17,7 @@ namespace PulseActiveShop.Core.Entities
             int productTypeId, 
             ProductType productType, 
             int productBrandId, 
-            ProductBrand productBrand)
+            Brand productBrand)
         {
             Name = name;
             Description = description;
@@ -43,7 +43,7 @@ namespace PulseActiveShop.Core.Entities
 
         public int? ProductBrandId { get; private set; }
 
-        public ProductBrand? ProductBrand { get; private set; }
+        public Brand? ProductBrand { get; private set; }
 
         public void UpdateDetails(ProductDetails details)
         {

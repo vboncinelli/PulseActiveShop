@@ -14,8 +14,8 @@
 
         public ProductType? ProductType { get; set; }
 
-        public int? ProductBrandId { get; set; }
+        public int? BrandId { get; set; }
 
-        public Brand? ProductBrand { get; set; }
+        public Brand? Brand { get; set; }
     }
 }

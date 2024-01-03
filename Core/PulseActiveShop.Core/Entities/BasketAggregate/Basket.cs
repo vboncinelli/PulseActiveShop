@@ -4,7 +4,7 @@ namespace PulseActiveShop.Core.Entities
 {
     public class Basket : BaseEntity, IAggregateRoot
     {
-        public string CustomerId { get; private set; }
+        public int? CustomerId { get; private set; }
 
         private readonly List<BasketItem> _items = new List<BasketItem>();
 
@@ -17,7 +17,7 @@ namespace PulseActiveShop.Core.Entities
 
         }
 
-        public Basket(string customerId)
+        public Basket(int customerId)
         {
             CustomerId = customerId;
         }
@@ -36,6 +36,8 @@ namespace PulseActiveShop.Core.Entities
         }
 
         public void RemoveEmptyItems() => this._items.RemoveAll(i => i.Quantity == 0);
+
+        public void SetNewCustomer(int userId) => this.CustomerId = userId;
 
         public void RemoveLine(Product product) => this._items.RemoveAll(item => item.ProductId == product.Id);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PulseActiveShop.Core.Constants;
+using System;
 
 namespace PulseActiveShop.Core.Entities
 {
@@ -26,18 +27,25 @@ namespace PulseActiveShop.Core.Entities
             if (quantity < 0)
                 throw new ArgumentException("Quantity cannot be negative");
 
+            if (this.Quantity + quantity > ShopConstants.MAX_QUANTITY)
+                throw new ArgumentException($"Quantity cannot be greater than {ShopConstants.MAX_QUANTITY} items");
+
             // TODO: What does it mean?
             checked
             {
-                Quantity += quantity;
+                this.Quantity += quantity;
             }
         }
 
         public void SetQuantity(int quantity)
         {
-            // TODO: Check for quantity limits
+            if (quantity < 0)
+                throw new ArgumentException("Quantity cannot be negative");
 
-            Quantity = quantity;
+            if (quantity > ShopConstants.MAX_QUANTITY)
+                throw new ArgumentException($"Quantity cannot be greater than {ShopConstants.MAX_QUANTITY} items");
+
+            this.Quantity = quantity;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using PulseActiveShop.Core.Entities;
 using PulseActiveShop.Core.Exceptions;
+using PulseActiveShop.Core.Interfaces.Core;
 using PulseActiveShop.Core.Interfaces.Repository;
 using PulseActiveShop.Dal.Sql.Contexts;
 using PulseActiveShop.Dal.Sql.Entities;
@@ -11,7 +12,7 @@ using System.Linq.Expressions;
 namespace PulseActiveShop.Dal.Sql.Repositories
 {
     public abstract class BaseRepository<TEntity, TEntityCollection, TDalEntity> : IRepository<TEntity, TEntityCollection>
-        where TEntity:BaseEntity, new()
+        where TEntity : BaseEntity, IAggregateRoot, new()
         where TEntityCollection : BaseEntityCollection<TEntity>, new()
         where TDalEntity : BaseDalEntity, new()
 

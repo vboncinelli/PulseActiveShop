@@ -1,9 +1,10 @@
 ﻿using PulseActiveShop.Core.Entities;
+using PulseActiveShop.Core.Interfaces.Core;
 
 namespace PulseActiveShop.Core.Interfaces.Repository;
 
 public interface IRepository<TEntity, TEntityCollection> : IReadRepository<TEntity, TEntityCollection>
-    where TEntity : BaseEntity, new()
+    where TEntity : BaseEntity, IAggregateRoot, new()
     where TEntityCollection : BaseEntityCollection<TEntity>, new()
 {
     Task<TEntity> AddAsync(TEntity entity);

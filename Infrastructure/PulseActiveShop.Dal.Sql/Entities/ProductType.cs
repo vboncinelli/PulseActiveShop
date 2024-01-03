@@ -2,5 +2,6 @@
 {
     public class ProductType : BaseDalEntity
     {
+        public string? Type { get; set; }
     }
 }
