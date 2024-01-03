@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using PulseActiveShop.Core.Entities;
 using PulseActiveShop.Core.Exceptions;
 using PulseActiveShop.Core.Interfaces.Repository;
 using Domain = PulseActiveShop.Core.Entities;
@@ -23,7 +24,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
                     {
                         var newOrder = await base.AddAsync(entity);
 
-                        foreach(var item in entity.OrderItems)
+                        foreach (var item in entity.OrderItems)
                         {
                             var attached = context.Set<EF.OrderItem>().Add(this.ToDal(item));
                             attached.State = EntityState.Added;
@@ -43,9 +44,26 @@ namespace PulseActiveShop.Dal.Sql.Repositories
             }
         }
 
+        public async Task<OrderCollection> GetCustomerOrdersAsync(int customerId, int page, int pageSize)
+        {
+            try
+            {
+                using (var context = this.GetContext())
+                {
+                    var query = context.Set<EF.Order>().Where(e => e.CustomerId == customerId);
+
+                    return await base.ExecutePaginatedQueryAsync(query, page, pageSize);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException(ex.Message, ex);
+            }
+        }
+
         protected override IQueryable<EF.Order> GetDefaultOrdering(IQueryable<EF.Order> query)
         {
-            return query.OrderBy(e => e.OrderDate).ThenBy(e => e.CustomerId);
+            return query.OrderBy(e => e.OrderDate);
         }
 
         #region Mappings
@@ -74,6 +92,39 @@ namespace PulseActiveShop.Dal.Sql.Repositories
             var order = new Domain.Order(dalEntity.CustomerId, address, this.ToDomain(dalEntity.OrderItems));
 
             return order;
+        }
+
+        protected List<Domain.OrderItem> ToDomain(IEnumerable<EF.OrderItem> collection)
+        {
+            var items = new List<Domain.OrderItem>();
+
+            if (collection != null)
+            {
+                foreach (var item in collection)
+                {
+                    items.Add(ToDomain(item));
+                }
+            }
+
+            return items;
+        }
+
+        protected override EF.Order ToDal(Domain.Order order)
+        {
+            var dalOrder = new EF.Order()
+            {
+                Id = order.Id,
+                CustomerId = order.CustomerId,
+                OrderDate = order.OrderDate,
+                Street = order.ShipToAddress.Street,
+                City = order.ShipToAddress.City,
+                StateOrProvince = order.ShipToAddress.StateOrProvince,
+                Country = order.ShipToAddress.Country,
+                ZipCode = order.ShipToAddress.ZipCode,
+                OrderItems = ToDal(order.OrderItems)
+            };
+
+            return dalOrder;
         }
 
         protected EF.OrderItem ToDal(Domain.OrderItem orderItem)
@@ -106,38 +157,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
             return items;
         }
 
-        protected override EF.Order ToDal(Domain.Order order)
-        {
-            var dalOrder = new EF.Order()
-            {
-                Id = order.Id,
-                CustomerId = order.CustomerId,
-                OrderDate = order.OrderDate,
-                Street = order.ShipToAddress.Street,
-                City = order.ShipToAddress.City,
-                StateOrProvince = order.ShipToAddress.StateOrProvince,
-                Country = order.ShipToAddress.Country,
-                ZipCode = order.ShipToAddress.ZipCode,
-                OrderItems = ToDal(order.OrderItems)
-            };
 
-            return dalOrder;
-        }
-
-        protected List<Domain.OrderItem> ToDomain(IEnumerable<EF.OrderItem> collection)
-        {
-            var items = new List<Domain.OrderItem>();
-
-            if (collection != null)
-            {
-                foreach (var item in collection)
-                {
-                    items.Add(ToDomain(item));
-                }
-            }
-
-            return items;
-        } 
         #endregion
     }
 }

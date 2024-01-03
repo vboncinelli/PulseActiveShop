@@ -6,7 +6,7 @@ public interface IOrderService : IService
 {
     Task CreateOrderAsync(int basketId, Address shippingAddress);
 
-    Task<OrderCollection> GetCustomerOrders(int[] ids, int page = 1, int pageSize = 25);
+    Task<OrderCollection> GetCustomerOrdersAsync(int customerId, int page = 1, int pageSize = 25);
 
     Task<Order?> GetOrderAsync(int orderId);
 

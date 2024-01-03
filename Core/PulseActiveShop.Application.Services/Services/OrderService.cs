@@ -43,11 +43,11 @@ namespace PulseActiveShop.Application.Services
             }
         }
 
-        public async Task<OrderCollection> GetCustomerOrders(int[] ids, int page = 1, int pageSize = 25)
+        public async Task<OrderCollection> GetCustomerOrdersAsync(int customerId, int page = 1, int pageSize = 25)
         {
             try
             {
-                return await this._orderRepository.FilterAsync(ids, page, pageSize);
+                return await this._orderRepository.GetCustomerOrdersAsync(customerId, page, pageSize);
             }
             catch (AppException)
             {
