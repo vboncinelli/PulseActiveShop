@@ -1,6 +1,7 @@
 ﻿using MediatR;
+using Microsoft.eShopWeb.Web.ViewModels;
 
-namespace PulseActiveShop.Web.MVC.Features;
+namespace PulseActiveShop.Web.Mvc.Features;
 
 public class GetMyOrders : IRequest<IEnumerable<OrderViewModel>>
 {

@@ -9,7 +9,7 @@ namespace PulseActiveShop.Dal.Sql.Mappers
         public DalProfile()
         {
             CreateMap<EF.ProductType, Domain.ProductType>().ReverseMap();
-            CreateMap<EF.ProductBrand, Domain.ProductBrand>().ReverseMap();
+            CreateMap<EF.Brand, Domain.ProductBrand>().ReverseMap();
             CreateMap<EF.Product, Domain.Product>().ReverseMap();
             CreateMap<EF.Address, Domain.Address>().ReverseMap();
             CreateMap<EF.Order, Domain.Order>().ReverseMap();

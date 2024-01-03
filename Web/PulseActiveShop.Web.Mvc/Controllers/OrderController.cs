@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using PulseActiveShop.Web.Mvc.Features;
 
 namespace PulseActiveShop.Web.Mvc.Controllers
 {
@@ -19,7 +19,6 @@ namespace PulseActiveShop.Web.Mvc.Controllers
             ArgumentNullException.ThrowIfNull(User?.Identity?.Name, nameof(User.Identity.Name));
 
             var viewModel = await _mediator.Send(new GetMyOrders(User.Identity.Name));
-
             return View(viewModel);
         }
 
@@ -38,4 +37,14 @@ namespace PulseActiveShop.Web.Mvc.Controllers
             return View(viewModel);
         }
     }
+
+    public class MyViewComponent : ViewComponent
+    {
+        public async Task<IViewComponentResult> InvokeAsync(int maxItems)
+        {
+            // Logica del componente
+            return View(/* dati da passare alla vista */);
+        }
+    }
+
 }

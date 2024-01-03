@@ -1,6 +1,6 @@
 ﻿namespace PulseActiveShop.Dal.Sql.Entities
 {
-    public class ProductBrand : BaseDalEntity
+    public class Brand : BaseDalEntity
     {
     }
 }

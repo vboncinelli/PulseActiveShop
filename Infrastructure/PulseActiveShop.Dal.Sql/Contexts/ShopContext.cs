@@ -14,7 +14,7 @@ namespace PulseActiveShop.Dal.Sql.Contexts
 
         internal DbSet<Product> Products { get; set; }
 
-        internal DbSet<ProductBrand> ProductBrands { get; set; }
+        internal DbSet<Brand> Brands { get; set; }
 
         internal DbSet<ProductType> ProductTypes { get; set; }
 
@@ -33,34 +33,39 @@ namespace PulseActiveShop.Dal.Sql.Contexts
                 entity.ToTable("Basket");
             });            
             
-            modelBuilder.Entity<Basket>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
-                entity.ToTable("Basket");
+                entity.ToTable("Product");
             });            
             
-            modelBuilder.Entity<Basket>(entity =>
+            modelBuilder.Entity<Brand>(entity =>
             {
-                entity.ToTable("Basket");
+                entity.ToTable("Brand");
             });            
             
-            modelBuilder.Entity<Basket>(entity =>
+            modelBuilder.Entity<ProductType>(entity =>
             {
-                entity.ToTable("Basket");
+                entity.ToTable("ProductType");
             });            
             
-            modelBuilder.Entity<Basket>(entity =>
+            modelBuilder.Entity<Order>(entity =>
             {
-                entity.ToTable("Basket");
+                entity.ToTable("Order");
             });            
             
-            modelBuilder.Entity<Basket>(entity =>
+            modelBuilder.Entity<OrderItem>(entity =>
             {
-                entity.ToTable("Basket");
+                entity.ToTable("OrderItem");
             });            
             
-            modelBuilder.Entity<Basket>(entity =>
+            modelBuilder.Entity<BasketItem>(entity =>
             {
-                entity.ToTable("Basket");
+                entity.ToTable("BasketItem");
+            });
+            
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("User");
             });
 
 
