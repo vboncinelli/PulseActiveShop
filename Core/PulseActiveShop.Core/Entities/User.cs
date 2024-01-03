@@ -6,29 +6,43 @@ namespace PulseActiveShop.Core.Entities
 {
     public class User : BaseEntity, IAggregateRoot
     {
-        public string? Username { get; set; }
+        public string Username { get; private set; } = null!;
 
-        public string? Password { get; set; }
+        public string Password { get; private set; } = null!;
 
-        public string? Email { get; set; }
-    }
+        public string Email { get; private set; } = null!;
 
-    public static class UserValidator
-    {
-        public static bool IsValidEmailAddress(this User user)
+        public User()
         {
-            if (user == null || string.IsNullOrWhiteSpace(user.Email)) return false;
+
+        }
+
+        public User(string username, string password, string email)
+        {
+            ThrowIfUsernameIsNotValid(username);
+            ThrowIfEmailIsNotValid(email);
+
+            Username = username;
+            Password = password;
+            Email = email;
+        }
+
+        public void ThrowIfEmailIsNotValid(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email)) throw new ArgumentNullException(email);
 
             Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
 
-            return regex.IsMatch(user.Email);
+            if (!regex.IsMatch(email))
+                throw new ArgumentException("The provided email is not valid");
         }
 
-        public static bool IsValidUsername(this User user)
+        public void ThrowIfUsernameIsNotValid(string username)
         {
-            if (user == null || string.IsNullOrWhiteSpace(user.Username)) return false;
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(username);
 
-            return user.Username.Length >= ShopConstants.USERNAME_MIN_LENGTH;
+            if (username.Length >= ShopConstants.USERNAME_MIN_LENGTH)
+                throw new ArgumentException($"The username should be {ShopConstants.USERNAME_MIN_LENGTH} chars long");
         }
     }
 

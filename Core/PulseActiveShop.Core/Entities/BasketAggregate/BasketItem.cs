@@ -1,5 +1,4 @@
 ﻿using PulseActiveShop.Core.Constants;
-using System;
 
 namespace PulseActiveShop.Core.Entities
 {

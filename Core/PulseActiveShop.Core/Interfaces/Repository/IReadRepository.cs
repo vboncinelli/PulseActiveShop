@@ -4,8 +4,8 @@ using PulseActiveShop.Core.Interfaces.Core;
 namespace PulseActiveShop.Core.Interfaces.Repository;
 
 public interface IReadRepository<TEntity, TEntityCollection>
-    where TEntity : BaseEntity, IAggregateRoot, new()
-    where TEntityCollection : BaseEntityCollection<TEntity>, new()
+    where TEntity : BaseEntity, IAggregateRoot
+    where TEntityCollection : BaseEntityCollection<TEntity>
 {
     Task<int> CountAsync();
 

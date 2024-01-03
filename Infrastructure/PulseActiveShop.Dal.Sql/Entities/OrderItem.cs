@@ -4,14 +4,14 @@ namespace PulseActiveShop.Dal.Sql.Entities
 {
     public class OrderItem : BaseDalEntity
     {
-        public int? ProductId { get; set; } 
+        public required int ProductId { get; set; }
 
-        public string? ProductName { get; set; }
+        public required string ProductName { get; set; }
         
-        public string? PictureUri { get; set; }
+        public required string PictureUri { get; set; }
 
-        public decimal? UnitPrice { get; private set; }
+        public required decimal UnitPrice { get; set; }
 
-        public int? Units { get; private set; }
+        public required int Units { get; set; }
     }
 }

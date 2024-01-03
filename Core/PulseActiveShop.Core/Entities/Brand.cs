@@ -10,6 +10,8 @@ namespace PulseActiveShop.Core.Entities
             this.Name = name;
         }
 
-        public string? Name { get; private set; }
+        public string Name { get; private set; } = null!;
     }
+
+    public class BrandCollection : BaseEntityCollection<Brand> { }
 }

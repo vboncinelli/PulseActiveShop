@@ -2,15 +2,21 @@
 {
     public class Order : BaseDalEntity
     {
-        public int? CustomerId { get; set; }
+        public required int CustomerId { get; set; }
 
         public User? Customer { get; set; }
 
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
 
-        public int? ShipToAddressId { get; set; }
+        public required string Street { get; set; }
 
-        public Address? ShipToAddress { get; set; }
+        public required string City { get; set; }
+
+        public required string StateOrProvince { get; set; }
+
+        public required string Country { get; set; }
+
+        public required string ZipCode { get; set; }
 
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }

@@ -6,15 +6,14 @@ using PulseActiveShop.Core.Interfaces.Core;
 using PulseActiveShop.Core.Interfaces.Repository;
 using PulseActiveShop.Dal.Sql.Contexts;
 using PulseActiveShop.Dal.Sql.Entities;
-using PulseActiveShop.Dal.Sql.Mappers;
 using System.Linq.Expressions;
 
 namespace PulseActiveShop.Dal.Sql.Repositories
 {
     public abstract class BaseRepository<TEntity, TEntityCollection, TDalEntity> : IRepository<TEntity, TEntityCollection>
-        where TEntity : BaseEntity, IAggregateRoot, new()
+        where TEntity : BaseEntity, IAggregateRoot
         where TEntityCollection : BaseEntityCollection<TEntity>, new()
-        where TDalEntity : BaseDalEntity, new()
+        where TDalEntity : BaseDalEntity
 
     {
         protected readonly IConfiguration _configuration;
@@ -52,7 +51,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
 
                     if (dalEntity == null) return null;
 
-                    return dalEntity.ToCore<TEntity, TDalEntity>();
+                    return this.ToDomain(dalEntity);
                 }
             }
             catch (Exception ex)
@@ -134,7 +133,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
             {
                 using (var context = this.GetContext())
                 {
-                    var dalEntity = entity.ToDal<TDalEntity, TEntity>();
+                    var dalEntity = this.ToDal(entity);
 
                     var attached = context.Set<TDalEntity>().Attach(dalEntity);
 
@@ -142,7 +141,9 @@ namespace PulseActiveShop.Dal.Sql.Repositories
 
                     await context.SaveChangesAsync();
 
-                    return dalEntity.ToCore<TEntity, TDalEntity>();
+                    var newEntity = await this.FindAsync(attached.Entity.Id);
+
+                    return newEntity!;
                 }
             }
             catch (Exception ex)
@@ -162,7 +163,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
             {
                 using (var context = this.GetContext())
                 {
-                    var dalEntity = entity.ToDal<TDalEntity, TEntity>();
+                    var dalEntity = this.ToDal(entity);
 
                     var attached = context.Set<TDalEntity>().Attach(dalEntity);
 
@@ -239,7 +240,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
                     var list = new List<TDalEntity>();
 
                     foreach (var item in collection)
-                        list.Add(item.ToDal<TDalEntity, TEntity>());
+                        list.Add(this.ToDal(item));
 
                     context.Set<TDalEntity>().AddRange(list);
 
@@ -266,7 +267,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
                     var list = new List<TDalEntity>();
 
                     foreach (var item in collection)
-                        list.Add(item.ToDal<TDalEntity, TEntity>());
+                        list.Add(this.ToDal(item));
 
                     context.Set<TDalEntity>().UpdateRange(list);
 
@@ -309,7 +310,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
             var collection = new TEntityCollection();
 
             foreach (var item in items)
-                collection.Add(item.ToCore<TEntity, TDalEntity>());
+                collection.Add(this.ToDomain(item)!);
 
             collection.Page = page;
             collection.PageSize = pageSize;
@@ -361,5 +362,9 @@ namespace PulseActiveShop.Dal.Sql.Repositories
         /// <param name="query">The queryable.</param>
         /// <returns>The queryable with the default ordering applied.</returns>
         protected abstract IQueryable<TDalEntity> GetDefaultOrdering(IQueryable<TDalEntity> query);
+
+        protected abstract TEntity? ToDomain(TDalEntity? dalEntity);
+
+        protected abstract TDalEntity ToDal(TEntity entity);
     }
 }

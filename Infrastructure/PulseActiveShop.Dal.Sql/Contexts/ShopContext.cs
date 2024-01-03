@@ -80,16 +80,16 @@ namespace PulseActiveShop.Dal.Sql.Contexts
                 entity.ToTable("Order");
 
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
+                entity.Property(e => e.City).HasMaxLength(128);
+                entity.Property(e => e.Country).HasMaxLength(128);
+                entity.Property(e => e.StateOrProvince).HasMaxLength(128);
+                entity.Property(e => e.Street).HasMaxLength(128);
+                entity.Property(e => e.ZipCode).HasMaxLength(10);
 
                 entity.HasOne(d => d.Customer).WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_User");
-
-                entity.HasOne(d => d.ShipToAddress).WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.ShipToAddressId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_Address");
             });
 
             modelBuilder.Entity<OrderItem>(entity =>

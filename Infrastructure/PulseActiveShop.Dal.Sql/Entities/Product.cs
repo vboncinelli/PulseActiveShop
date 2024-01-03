@@ -2,19 +2,19 @@
 {
     public class Product : BaseDalEntity
     {
-        public string? Name { get; set; }
+        public required string Name { get; set; }
 
         public string? Description { get; set; }
 
-        public decimal? Price { get; set; }
+        public required decimal Price { get; set; }
 
         public string? PictureUri { get; set; }
 
-        public int? ProductTypeId { get; set; }
+        public required int ProductTypeId { get; set; }
 
         public ProductType? ProductType { get; set; }
 
-        public int? BrandId { get; set; }
+        public required int BrandId { get; set; }
 
         public Brand? Brand { get; set; }
 

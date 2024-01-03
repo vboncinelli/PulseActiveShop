@@ -10,40 +10,40 @@ namespace PulseActiveShop.Core.Entities
         }
 
         public Product(
-            string name, 
-            string description, 
-            decimal price, 
-            string pictureUri, 
-            int productTypeId, 
-            ProductType productType, 
-            int productBrandId, 
-            Brand productBrand)
+            string name,
+            decimal price,
+            int productTypeId,
+            string productTypeName,
+            int brandId,
+            string brandName,
+            string? description = null,
+            string? pictureUri = null)
         {
             Name = name;
             Description = description;
             Price = price;
             PictureUri = pictureUri;
             ProductTypeId = productTypeId;
-            ProductType = productType;
-            ProductBrandId = productBrandId;
-            ProductBrand = productBrand;
+            ProductTypeName = productTypeName;
+            BrandId = brandId;
+            BrandName = brandName;
         }
 
-        public string? Name { get; private set; }
+        public string Name { get; private set; } = null!;
 
         public string? Description { get; private set; }
 
-        public decimal? Price { get; private set; }
+        public decimal Price { get; private set; }
 
         public string? PictureUri { get; private set; }
 
-        public int? ProductTypeId { get; private set; }
+        public int ProductTypeId { get; private set; }
 
-        public ProductType? ProductType { get; private set; }
+        public string ProductTypeName { get; private set; } = null!;
 
-        public int? ProductBrandId { get; private set; }
+        public int BrandId { get; private set; }
 
-        public Brand? ProductBrand { get; private set; }
+        public string BrandName { get; private set; } = null!;
 
         public void UpdateDetails(ProductDetails details)
         {
@@ -54,20 +54,22 @@ namespace PulseActiveShop.Core.Entities
             Price = details.Price;
         }
 
-        public void UpdateBrand(int productBrandId)
+        public void UpdateBrand(Brand brand)
         {
-            if (productBrandId < 0)
-                throw new ArgumentException(nameof(productBrandId));
+            if (brand == null)
+                throw new ArgumentNullException(nameof(brand));
 
-            ProductBrandId = productBrandId;
+            BrandId = brand.Id;
+            BrandName = brand.Name;
         }
 
-        public void UpdateType(int productTypeId)
+        public void UpdateType(ProductType type)
         {
-            if (productTypeId < 0)
-                throw new ArgumentException(nameof(productTypeId));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
 
-            ProductTypeId = productTypeId;
+            ProductTypeId = type.Id;
+            ProductTypeName = type.Type;
         }
 
         public void UpdatePictureUri(string pictureName)

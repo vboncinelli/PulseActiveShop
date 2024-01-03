@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using PulseActiveShop.Core.Constants;
 using PulseActiveShop.Core.Entities;
 using PulseActiveShop.Core.Exceptions;
 using PulseActiveShop.Core.Interfaces.Repository;
@@ -154,21 +153,19 @@ namespace PulseActiveShop.Application.Services.Services
         /// </summary>
         /// <param name="entity">The User entity to insert.</param>
         /// <returns>The inserted User entity.</returns>
-        public async Task<User> AddAsync(User entity)
+        public async Task<User> AddAsync(string username, string password, string email)
         {
             try
             {
-                this.ValidateUserData(entity);
+                await ThrowIfUsernameAlreadyExistsAsync(username);
 
-                await ThrowIfUsernameAlreadyExistsAsync(entity.Username!);
+                await ThrowIfEmailAlreadyExistsAsync(email);
 
-                await ThrowIfEmailAlreadyExistsAsync(entity.Email!);
+                var hashedPassword = _cryptoService.HashPassword(password);
 
-                var hashedPassword = _cryptoService.HashPassword(entity.Password!);
+                var user = new User(username, hashedPassword, email);
 
-                entity.Password = hashedPassword;
-
-                return await this._userRepository.AddAsync(entity);
+                return await this._userRepository.AddAsync(user);
             }
             catch (AppException)
             {
@@ -180,23 +177,6 @@ namespace PulseActiveShop.Application.Services.Services
             }
         }
 
-        private void ValidateUserData(User user)
-        {
-            if (!user.IsValidUsername())
-            {
-                throw new InvalidParameterException($"Please provide an username. The username should be at least {ShopConstants.USERNAME_MIN_LENGTH} characters long");
-            }
-
-            if (!user.IsValidEmailAddress())
-            {
-                throw new InvalidParameterException("Please provide a valid email");
-            }
-
-            if (string.IsNullOrEmpty(user.Password))
-            {
-                throw new InvalidParameterException("Please provide a password");
-            }
-        }
 
         private async Task ThrowIfUsernameAlreadyExistsAsync(string username)
         {

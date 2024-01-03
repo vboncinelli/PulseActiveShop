@@ -1,14 +1,15 @@
-﻿using PulseActiveShop.Core.Interfaces.Core;
+﻿using PulseActiveShop.Core.Exceptions;
+using PulseActiveShop.Core.Interfaces.Core;
 
 namespace PulseActiveShop.Core.Entities
 {
     public class Order : BaseEntity, IAggregateRoot
     {
-        public int? CustomerId { get; private set; }
+        public int CustomerId { get; private set; }
 
         public DateTime OrderDate { get; private set; } = DateTime.UtcNow;
 
-        public Address? ShipToAddress { get; private set; }
+        public Address ShipToAddress { get; private set; } = null!;
 
         public List<OrderItem> OrderItems { get; private set; } = new List<OrderItem>();
 
@@ -18,7 +19,7 @@ namespace PulseActiveShop.Core.Entities
 
         }
 
-        public Order(int? customerId, Address? shipToAddress, List<OrderItem> orderItems)
+        public Order(int customerId, Address shipToAddress, List<OrderItem> orderItems)
         {
             this.CustomerId = customerId;
             this.ShipToAddress = shipToAddress;
@@ -35,6 +36,33 @@ namespace PulseActiveShop.Core.Entities
             }
 
             return total;
+        }
+
+        public void AddOrderItems(List<OrderItem> items)
+        {
+            if (items.Count > 0)
+            {
+                foreach (var item in items)
+                {
+                    var existingItemIndex = this.OrderItems.FindIndex(e => e.ItemOrdered.ProductId == item.ItemOrdered.ProductId);
+
+                    if (existingItemIndex < 0)
+                        this.OrderItems.Add(item);
+                    else
+                        // in a real app this logic would be more complex and fine-grained
+                        this.OrderItems[existingItemIndex].UpdateUnits(1);
+                }
+            }
+        }
+        
+        public void RemoveOrderItem(int orderItemId)
+        {
+            var existingItemIndex = this.OrderItems.FindIndex(e => e.Id == orderItemId);
+
+            if (existingItemIndex < 0)
+                throw new EntityNotFoundException($"Order item with id {orderItemId} not found");
+
+            this.OrderItems.RemoveAt(existingItemIndex);
         }
     }
 

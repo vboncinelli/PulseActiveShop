@@ -2,15 +2,15 @@
 {
     public class BasketItem : BaseDalEntity
     {
-        public decimal UnitPrice { get; set; }
+        public required decimal UnitPrice { get; set; }
 
-        public int Quantity { get; set; }
+        public required int Quantity { get; set; }
 
-        public int ProductId { get; set; }
+        public required int ProductId { get; set; }
 
         public Product? Product { get; set; }
 
-        public int BasketId { get; set; }
+        public required int BasketId { get; set; }
 
         public Basket? Basket { get; set; }
     }

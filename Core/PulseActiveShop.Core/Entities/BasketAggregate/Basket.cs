@@ -4,7 +4,7 @@ namespace PulseActiveShop.Core.Entities
 {
     public class Basket : BaseEntity, IAggregateRoot
     {
-        public int? CustomerId { get; private set; }
+        public int CustomerId { get; private set; }
 
         private readonly List<BasketItem> _items = new List<BasketItem>();
 
