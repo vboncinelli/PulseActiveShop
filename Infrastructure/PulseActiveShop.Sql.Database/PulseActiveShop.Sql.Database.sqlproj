@@ -13,8 +13,8 @@
     </RootPath>
     <RootNamespace>PulseActiveShop.Sql.Database</RootNamespace>
     <AssemblyName>PulseActiveShop.Sql.Database</AssemblyName>
-    <ModelCollation>1033, CI</ModelCollation>
-    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
@@ -22,6 +22,8 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -56,5 +58,17 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Address.sql" />
+    <Build Include="Tables\Product.sql" />
+    <Build Include="Tables\BasketItem.sql" />
+    <Build Include="Tables\Basket.sql" />
+    <Build Include="Tables\User.sql" />
+    <Build Include="Tables\ProductType.sql" />
+    <Build Include="Tables\Order.sql" />
+    <Build Include="Tables\OrderItem.sql" />
+    <Build Include="Tables\Brand.sql" />
   </ItemGroup>
 </Project>
