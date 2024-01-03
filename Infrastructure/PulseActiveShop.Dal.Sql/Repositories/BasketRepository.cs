@@ -7,7 +7,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
 {
     public class BasketRepository : BaseRepository<Domain.Basket, Domain.BasketCollection, EF.Basket>, IBasketRepository
     {
-        public BasketRepository(IConfiguration configuration, string[]? includedEntities = null) : base(configuration, includedEntities)
+        public BasketRepository(IConfiguration configuration) : base(configuration, new[] { "Items" })
         {
         }
 

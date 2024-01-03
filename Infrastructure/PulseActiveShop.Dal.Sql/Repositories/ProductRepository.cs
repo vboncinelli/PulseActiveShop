@@ -6,7 +6,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
 {
     public class ProductRepository : BaseRepository<Domain.Product, Domain.ProductCollection, EF.Product>
     {
-        public ProductRepository(IConfiguration configuration) : base(configuration)
+        public ProductRepository(IConfiguration configuration) : base(configuration, new[] { "Brand", "ProductType" })
         {
         }
 

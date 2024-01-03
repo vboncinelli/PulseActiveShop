@@ -8,7 +8,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
 {
     public class OrderRepository : BaseRepository<Domain.Order, Domain.OrderCollection, EF.Order>, IOrderRepository
     {
-        public OrderRepository(IConfiguration configuration) : base(configuration, new[] { "User" })
+        public OrderRepository(IConfiguration configuration) : base(configuration, new[] { "OrderItems" })
         {
         }
 
