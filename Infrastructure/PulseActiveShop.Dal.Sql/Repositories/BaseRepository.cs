@@ -45,9 +45,14 @@ namespace PulseActiveShop.Dal.Sql.Repositories
             {
                 using (var context = this.GetContext())
                 {
-                    var dalEntity = await context
-                        .Set<TDalEntity>()
-                        .FirstOrDefaultAsync(e => e.Id == id);
+                    var query = context
+                        .Set<TDalEntity>().AsQueryable();
+
+                    if (this._includedEntities != null)
+                        foreach (var included in this._includedEntities)
+                            query = query.Include(included);
+
+                    var dalEntity = await query.FirstOrDefaultAsync(e => e.Id == id);
 
                     if (dalEntity == null) return null;
 

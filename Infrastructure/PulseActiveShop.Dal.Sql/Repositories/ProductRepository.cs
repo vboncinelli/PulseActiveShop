@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using PulseActiveShop.Core.Entities;
 using PulseActiveShop.Core.Interfaces.Repository;
 using Domain = PulseActiveShop.Core.Entities;
 using EF = PulseActiveShop.Dal.Sql.Entities;

@@ -8,8 +8,7 @@ namespace PulseActiveShop.Api.Entities
         [Required]
         public string Name { get; set; } = null!;
 
-        [Required]
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; }
 
         [Required]
         public decimal? Price { get; set; }

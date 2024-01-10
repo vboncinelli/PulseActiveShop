@@ -14,7 +14,7 @@ namespace PulseActiveShop.Core.Entities
             decimal price,
             int productTypeId,
             int brandId,
-            string description,
+            string? description = null,
             string? pictureUri = null)
         {
             Name = name;
@@ -27,7 +27,7 @@ namespace PulseActiveShop.Core.Entities
 
         public string Name { get; private set; } = null!;
 
-        public string Description { get; private set; }
+        public string? Description { get; private set; }
 
         public decimal Price { get; private set; }
 
