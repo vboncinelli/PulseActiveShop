@@ -13,5 +13,7 @@ namespace PulseActiveShop.Core.Interfaces.Services
         Task<Product> UpdateProductBrandAsync(int productId, int brandId);
 
         Task<Product> UpdateProductDetailsAsync(int productId, ProductDetails productDetails);
+        
+        Task DeleteAsync(int id);
     }
 }

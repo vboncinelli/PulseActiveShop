@@ -1,4 +1,4 @@
-﻿namespace PulseActiveShop.Core.Interfaces;
+﻿namespace PulseActiveShop.Core.Interfaces.Services;
 
 /// <summary>
 /// Specific query used to fetch count without running in memory

@@ -4,7 +4,7 @@ using PulseActiveShop.Core.Exceptions;
 using PulseActiveShop.Core.Interfaces.Repository;
 using PulseActiveShop.Core.Interfaces.Services;
 
-namespace PulseActiveShop.Application.Services.Services
+namespace PulseActiveShop.Application.Services
 {
     public class ProductService : BaseService<Product, ProductCollection, ProductService>, IProductService
     {
@@ -104,9 +104,25 @@ namespace PulseActiveShop.Application.Services.Services
                 var brand = await this._brandRepository.FindAsync(brandId) ??
                     throw new EntityNotFoundException($"Brand with id {brandId} not found");
 
-                product.UpdateBrand(brand);
+                product.UpdateBrand(brandId);
 
                 return await this._productRepository.UpdateAsync(product);
+            }
+            catch (AppException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new AppException("An error occurred while creating an order", ex);
+            }
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            try
+            {
+                await this._productRepository.DeleteAsync(id);
             }
             catch (AppException)
             {

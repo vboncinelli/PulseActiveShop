@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
+using PulseActiveShop.Core.Interfaces.Repository;
 using Domain = PulseActiveShop.Core.Entities;
 using EF = PulseActiveShop.Dal.Sql.Entities;
 
 namespace PulseActiveShop.Dal.Sql.Repositories
 {
-    public class ProductRepository : BaseRepository<Domain.Product, Domain.ProductCollection, EF.Product>
+    public class ProductRepository : BaseRepository<Domain.Product, Domain.ProductCollection, EF.Product>, IProductRepository
     {
         public ProductRepository(IConfiguration configuration) : base(configuration, new[] { "Brand", "ProductType" })
         {
@@ -41,9 +42,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
                 name: dalEntity.Name,
                 description: dalEntity.Description,
                 productTypeId: dalEntity.ProductType!.Id,
-                productTypeName: dalEntity.ProductType.Type,
                 brandId: dalEntity.Brand!.Id,
-                brandName: dalEntity.Brand!.Name,
                 pictureUri: dalEntity.PictureUri,
                 price: dalEntity.Price);
 

@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace PulseActiveShop.Api.Entities
+﻿namespace PulseActiveShop.Api.Entities
 {
     public class User : BaseApiEntity
     {

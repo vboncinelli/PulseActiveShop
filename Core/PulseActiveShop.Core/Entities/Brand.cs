@@ -10,6 +10,11 @@ namespace PulseActiveShop.Core.Entities
             this.Name = name;
         }
 
+        public Brand(int id, string name): this(name)
+        {
+            this.Id = id;
+        }
+
         public string Name { get; private set; } = null!;
     }
 

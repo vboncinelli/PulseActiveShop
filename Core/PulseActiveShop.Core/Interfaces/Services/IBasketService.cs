@@ -1,7 +1,6 @@
-﻿
-using PulseActiveShop.Core.Entities;
+﻿using PulseActiveShop.Core.Entities;
 
-namespace PulseActiveShop.Core.Interfaces;
+namespace PulseActiveShop.Core.Interfaces.Services;
 
 public interface IBasketService
 {

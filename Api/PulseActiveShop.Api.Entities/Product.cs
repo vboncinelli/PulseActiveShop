@@ -1,26 +1,31 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace PulseActiveShop.Api.Entities
 {
     public class Product : BaseApiEntity
     {
-        [JsonPropertyName("name")]
-        public string? Name { get; set; }
+        [Required]
+        public string Name { get; set; } = null!;
 
-        [JsonPropertyName("description")]
-        public string? Description { get; set; }
+        [Required]
+        public string Description { get; set; } = null!;
 
-        [JsonPropertyName("price")]
+        [Required]
         public decimal? Price { get; set; }
 
-        [JsonPropertyName("pictureUri")]
         public string? PictureUri { get; set; }
 
-        [JsonPropertyName("productType")]
+        [Required]
+        public int ProductTypeId { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ProductType? ProductType { get; set; }
 
-        [JsonPropertyName("productBrand")]
-        public ProductBrand? ProductBrand { get; set; }
+        public int BrandId { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ProductBrand? Brand { get; set; }
     }
 
     public class ProductCollection : BaseApiEntityCollection<Product> { }

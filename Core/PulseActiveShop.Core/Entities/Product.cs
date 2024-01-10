@@ -13,10 +13,8 @@ namespace PulseActiveShop.Core.Entities
             string name,
             decimal price,
             int productTypeId,
-            string productTypeName,
             int brandId,
-            string brandName,
-            string? description = null,
+            string description,
             string? pictureUri = null)
         {
             Name = name;
@@ -24,14 +22,12 @@ namespace PulseActiveShop.Core.Entities
             Price = price;
             PictureUri = pictureUri;
             ProductTypeId = productTypeId;
-            ProductTypeName = productTypeName;
             BrandId = brandId;
-            BrandName = brandName;
         }
 
         public string Name { get; private set; } = null!;
 
-        public string? Description { get; private set; }
+        public string Description { get; private set; }
 
         public decimal Price { get; private set; }
 
@@ -39,44 +35,38 @@ namespace PulseActiveShop.Core.Entities
 
         public int ProductTypeId { get; private set; }
 
-        public string ProductTypeName { get; private set; } = null!;
-
         public int BrandId { get; private set; }
-
-        public string BrandName { get; private set; } = null!;
 
         public void UpdateDetails(ProductDetails details)
         {
             ArgumentNullException.ThrowIfNull(details, nameof(details));
 
-            Name = details.Name;
-            Description = details.Description;
-            Price = details.Price;
+            this.Name = details.Name;
+            this.Description = details.Description;
+            this.Price = details.Price;
         }
 
-        public void UpdateBrand(Brand brand)
+        public void UpdateBrand(int brandId)
         {
-            if (brand == null)
-                throw new ArgumentNullException(nameof(brand));
+            if (brandId < 0)
+                throw new ArgumentOutOfRangeException(nameof(brandId));
 
-            BrandId = brand.Id;
-            BrandName = brand.Name;
+            this.BrandId = brandId;
         }
 
-        public void UpdateType(ProductType type)
+        public void UpdateType(int productTypeId)
         {
-            if (type == null)
-                throw new ArgumentNullException(nameof(type));
+            if (productTypeId < 0)
+                throw new ArgumentOutOfRangeException(nameof(productTypeId));
 
-            ProductTypeId = type.Id;
-            ProductTypeName = type.Type;
+            this.ProductTypeId = productTypeId;
         }
 
         public void UpdatePictureUri(string pictureName)
         {
             if (string.IsNullOrEmpty(pictureName))
             {
-                PictureUri = string.Empty;
+                this.PictureUri = string.Empty;
                 return;
             }
             //TODO: replace
