@@ -3,7 +3,7 @@ using Domain = PulseActiveShop.Core.Entities;
 
 namespace PulseActiveShop.Api.Mappers
 {
-    public static class ProductMapper
+    public static class ProductMapping
     {
         public static Domain.Product ToDomain(this ApiEntities.Product product)
         {

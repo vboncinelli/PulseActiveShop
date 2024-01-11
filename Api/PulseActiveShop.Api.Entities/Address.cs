@@ -2,7 +2,7 @@
 
 namespace PulseActiveShop.Api.Entities
 {
-    public class Address : BaseApiEntity
+    public class Address
     {
         [JsonPropertyName("street")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

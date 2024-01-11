@@ -19,8 +19,46 @@ namespace PulseActiveShop.Api.Controllers
         }
 
 
+        [HttpGet("/customer/id/{customerId}")]
+        public async Task<IActionResult> GetBasketByCustomerIdAsync(Guid customerId)
+        {
+            try
+            {
+                var basket = await this._basketService.FindBasketByCustomerIdAsync(customerId);
+
+                if (basket == null) return NotFound();
+
+                return Ok(basket.ToApi());
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message, ex);
+
+                throw;
+            }
+        }
+
+        [HttpGet("/customer/name/{customerName}")]
+        public async Task<IActionResult> GetBasketByCustomerNameAsync(string customerName)
+        {
+            try
+            {
+                var basket = await this._basketService.FindBasketByCustomerNameAsync(customerName);
+
+                if (basket == null) return NotFound();
+
+                return Ok(basket.ToApi());
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex.Message, ex);
+
+                throw;
+            }
+        }
+
         [HttpPost]
-        public async Task<Basket?> AddItemToBasket(Guid customerId, [FromBody] BasketItem item)
+        public async Task<Basket?> AddItemToBasketAsync(Guid customerId, [FromBody] BasketItem item)
         {
             try
             {
@@ -36,8 +74,25 @@ namespace PulseActiveShop.Api.Controllers
             }
         }
 
-        [HttpPut("/quantities")]
-        public async Task SetQuantities(Guid basketId, [FromBody] Dictionary<string, int> quantities)
+        /// <summary>
+        /// Update the items quantity in the basket.
+        /// </summary>
+        /// <param name="basketId"></param>
+        /// <param name="quantities">A dictionary of productId and related quantity</param>
+        /// <returns>A newly created TodoItem</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /<basketId>
+        ///     {
+        ///        "<productId>": "<guid>",
+        ///        "<productId>": "<guid>",
+        ///        "<productId>": "<guid>"
+        ///     }
+        ///
+        /// </remarks>
+        [HttpPut("/{basketId}/quantities")]
+        public async Task SetQuantitiesAsync(Guid basketId, [FromBody] Dictionary<string, int> quantities)
         {
             try
             {
