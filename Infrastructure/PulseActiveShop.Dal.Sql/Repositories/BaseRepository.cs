@@ -39,7 +39,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
         /// </summary>
         /// <param name="id">The ID of the entity to retrieve.</param>
         /// <returns>The entity with the specified ID, or null if no such entity exists.</returns>
-        public virtual async Task<TEntity?> FindAsync(int id)
+        public virtual async Task<TEntity?> FindAsync(Guid id)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
         /// </summary>
         /// <param name="id">The id of the entity to check.</param>
         /// <returns>True if the entity exists, false otherwise.</returns>
-        public virtual async Task<bool> ExistsAsync(int id)
+        public virtual async Task<bool> ExistsAsync(Guid id)
         {
             try
             {
@@ -109,7 +109,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
         }
 
 
-        public virtual async Task<TEntityCollection> FilterAsync(int[] ids, int page = 1, int pageSize = int.MaxValue)
+        public virtual async Task<TEntityCollection> FilterAsync(Guid[] ids, int page = 1, int pageSize = int.MaxValue)
         {
             try
             {
@@ -190,7 +190,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
         /// </summary>
         /// <param name="id">The id of the entity to delete.</param>
         /// <returns>A task that represents the asynchronous delete operation.</returns>
-        public virtual async Task DeleteAsync(int id)
+        public virtual async Task DeleteAsync(Guid id)
         {
             try
             {

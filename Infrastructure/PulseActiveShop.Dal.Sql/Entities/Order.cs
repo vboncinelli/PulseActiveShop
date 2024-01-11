@@ -2,7 +2,7 @@
 {
     public class Order : BaseDalEntity
     {
-        public required int CustomerId { get; set; }
+        public required Guid CustomerId { get; set; }
 
         public User? Customer { get; set; }
 

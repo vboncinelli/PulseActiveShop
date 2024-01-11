@@ -8,11 +8,13 @@ namespace PulseActiveShop.Core.Entities
 
         public int Quantity { get; private set; }
 
-        public int ProductId { get; private set; }
+        public Guid ProductId { get; private set; }
 
-        public int BasketId { get; private set; }
+        public Product? Product { get; private set; }
 
-        public BasketItem(int productId, int quantity, decimal unitPrice)
+        public Guid BasketId { get; private set; }
+
+        public BasketItem(Guid productId, int quantity, decimal unitPrice)
         {
             ProductId = productId;
 

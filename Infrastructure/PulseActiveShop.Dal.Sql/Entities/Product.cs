@@ -10,11 +10,11 @@
 
         public string? PictureUri { get; set; }
 
-        public required int ProductTypeId { get; set; }
+        public required Guid ProductTypeId { get; set; }
 
         public ProductType? ProductType { get; set; }
 
-        public required int BrandId { get; set; }
+        public required Guid BrandId { get; set; }
 
         public Brand? Brand { get; set; }
 

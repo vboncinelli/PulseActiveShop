@@ -11,7 +11,7 @@ public interface IRepository<TEntity, TEntityCollection> : IReadRepository<TEnti
 
     Task AddBulkAsync(TEntityCollection collection);
     
-    Task DeleteAsync(int id);
+    Task DeleteAsync(Guid id);
     
     Task<TEntity> UpdateAsync(TEntity entity);
     

@@ -12,8 +12,8 @@ namespace PulseActiveShop.Core.Entities
         public Product(
             string name,
             decimal price,
-            int productTypeId,
-            int brandId,
+            Guid productTypeId,
+            Guid brandId,
             string? description = null,
             string? pictureUri = null)
         {
@@ -33,9 +33,9 @@ namespace PulseActiveShop.Core.Entities
 
         public string? PictureUri { get; private set; }
 
-        public int ProductTypeId { get; private set; }
+        public Guid ProductTypeId { get; private set; }
 
-        public int BrandId { get; private set; }
+        public Guid BrandId { get; private set; }
 
         public void UpdateDetails(ProductDetails details)
         {
@@ -46,18 +46,18 @@ namespace PulseActiveShop.Core.Entities
             this.Price = details.Price;
         }
 
-        public void UpdateBrand(int brandId)
+        public void UpdateBrand(Guid brandId)
         {
-            if (brandId < 0)
-                throw new ArgumentOutOfRangeException(nameof(brandId));
+            if (brandId == Guid.Empty)
+                throw new ArgumentException(nameof(brandId));
 
             this.BrandId = brandId;
         }
 
-        public void UpdateType(int productTypeId)
+        public void UpdateType(Guid productTypeId)
         {
-            if (productTypeId < 0)
-                throw new ArgumentOutOfRangeException(nameof(productTypeId));
+            if (productTypeId == Guid.Empty)
+                throw new ArgumentException(nameof(productTypeId));
 
             this.ProductTypeId = productTypeId;
         }

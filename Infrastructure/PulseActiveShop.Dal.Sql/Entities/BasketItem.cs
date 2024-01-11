@@ -6,11 +6,11 @@
 
         public required int Quantity { get; set; }
 
-        public required int ProductId { get; set; }
+        public required Guid ProductId { get; set; }
 
         public Product? Product { get; set; }
 
-        public required int BasketId { get; set; }
+        public required Guid BasketId { get; set; }
 
         public Basket? Basket { get; set; }
     }

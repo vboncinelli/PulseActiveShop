@@ -26,10 +26,8 @@ namespace PulseActiveShop.Test
             var product = new Product(
                 name: "Warm Socks",
                 price: 9.99M,
-                productTypeId: 5,
-                productTypeName: "",
-                brandId: 1,
-                brandName: "",
+                productTypeId: Guid.NewGuid(), // fix this
+                brandId: Guid.NewGuid(),
                 description: "100% pure wool socks",
                 pictureUri: "socks.png");
 
@@ -67,7 +65,7 @@ namespace PulseActiveShop.Test
             }
 
             var order = new Order(
-                customerId: 1,
+                customerId: Guid.NewGuid(),
                 new Address("Sunset Boulevard", "Los Angeles", "California", "USA", "10000"),
                 orderItems);
         }

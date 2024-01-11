@@ -6,14 +6,14 @@ namespace PulseActiveShop.Core.Interfaces.Services
     {
         Task<Product> AddProductAsync(Product product);
 
-        Task<Product?> FindProductAsync(int id);
+        Task<Product?> FindProductAsync(Guid id);
 
         Task<ProductCollection> GetAllProductsAsync(int page = 1, int pageSize = 25);
 
-        Task<Product> UpdateProductBrandAsync(int productId, int brandId);
+        Task<Product> UpdateProductBrandAsync(Guid productId, Guid brandId);
 
-        Task<Product> UpdateProductDetailsAsync(int productId, ProductDetails productDetails);
+        Task<Product> UpdateProductDetailsAsync(Guid productId, ProductDetails productDetails);
         
-        Task DeleteAsync(int id);
+        Task DeleteAsync(Guid id);
     }
 }

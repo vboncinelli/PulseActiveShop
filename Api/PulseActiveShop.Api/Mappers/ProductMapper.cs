@@ -19,6 +19,13 @@ namespace PulseActiveShop.Api.Mappers
             return entity;
         }
 
+        public static Domain.ProductDetails ToDomain(this ApiEntities.ProductDetails productDetails)
+        {
+            var entity = new Domain.ProductDetails(productDetails.Name, productDetails.Description, productDetails.Price);
+
+            return entity;
+        }
+
         public static ApiEntities.Product? ToApi(this Domain.Product? product)
         {
             if (product == null) return null;
@@ -36,13 +43,6 @@ namespace PulseActiveShop.Api.Mappers
             return entity;
         }
 
-        public static Domain.ProductDetails ToDomain(this ApiEntities.ProductDetails  productDetails)
-        {
-            var entity = new Domain.ProductDetails(productDetails.Name, productDetails.Description, productDetails.Price);
-
-            return entity;
-        }
-
         public static ApiEntities.ProductDetails? ToApi(this Domain.ProductDetails? productDetails)
         {
             if (productDetails == null) return null;
@@ -55,6 +55,16 @@ namespace PulseActiveShop.Api.Mappers
             };
 
             return entity;
+        }
+
+        public static List<ApiEntities.Product> ToApi(this Domain.ProductCollection collection)
+        {
+            var items = new List<ApiEntities.Product>();
+            
+            foreach (var item in collection)
+                items.Add(item.ToApi()!);
+            
+            return items;
         }
     }
 }

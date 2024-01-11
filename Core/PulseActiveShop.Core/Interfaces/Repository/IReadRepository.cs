@@ -9,12 +9,12 @@ public interface IReadRepository<TEntity, TEntityCollection>
 {
     Task<int> CountAsync();
 
-    Task<bool> ExistsAsync(int id);
+    Task<bool> ExistsAsync(Guid id);
     
-    Task<TEntity?> FindAsync(int id);
+    Task<TEntity?> FindAsync(Guid id);
 
     Task<TEntityCollection> GetAllAsync(int page, int pageSize);
 
-    Task<TEntityCollection> FilterAsync(int[] ids, int page = 1, int pageSize = int.MaxValue);
+    Task<TEntityCollection> FilterAsync(Guid[] ids, int page = 1, int pageSize = int.MaxValue);
 
 }

@@ -16,12 +16,12 @@ namespace PulseActiveShop.Api.Entities
         public string? PictureUri { get; set; }
 
         [Required]
-        public int ProductTypeId { get; set; }
+        public Guid ProductTypeId { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ProductType? ProductType { get; set; }
 
-        public int BrandId { get; set; }
+        public Guid BrandId { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ProductBrand? Brand { get; set; }

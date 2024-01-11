@@ -2,7 +2,7 @@
 {
     public class Basket : BaseDalEntity
     {
-        public required int CustomerId { get; set; }
+        public required Guid CustomerId { get; set; }
 
         public ICollection<BasketItem> Items { get; set;} = new List<BasketItem>();
     }

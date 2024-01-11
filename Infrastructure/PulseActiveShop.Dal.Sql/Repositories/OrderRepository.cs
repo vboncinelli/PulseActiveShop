@@ -44,7 +44,7 @@ namespace PulseActiveShop.Dal.Sql.Repositories
             }
         }
 
-        public async Task<OrderCollection> GetCustomerOrdersAsync(int customerId, int page, int pageSize)
+        public async Task<OrderCollection> GetCustomerOrdersAsync(Guid customerId, int page, int pageSize)
         {
             try
             {

@@ -1,10 +1,8 @@
-﻿using PulseActiveShop.Core.Entities;
-
-namespace PulseActiveShop.Dal.Sql.Entities
+﻿namespace PulseActiveShop.Dal.Sql.Entities
 {
     public class OrderItem : BaseDalEntity
     {
-        public required int ProductId { get; set; }
+        public required Guid ProductId { get; set; }
 
         public required string ProductName { get; set; }
         

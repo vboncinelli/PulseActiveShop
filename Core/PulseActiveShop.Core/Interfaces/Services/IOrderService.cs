@@ -4,13 +4,13 @@ namespace PulseActiveShop.Core.Interfaces.Services;
 
 public interface IOrderService : IService
 {
-    Task CreateOrderAsync(int basketId, Address shippingAddress);
+    Task CreateOrderAsync(Guid basketId, Address shippingAddress);
 
-    Task<OrderCollection> GetCustomerOrdersAsync(int customerId, int page = 1, int pageSize = 25);
+    Task<OrderCollection> GetCustomerOrdersAsync(Guid customerId, int page = 1, int pageSize = 25);
 
-    Task<Order?> GetOrderAsync(int orderId);
+    Task<Order?> GetOrderAsync(Guid orderId);
 
-    Task<Order> AddOrderItemsAsync(int orderId, List<OrderItem> orderItems);
+    Task<Order> AddOrderItemsAsync(Guid orderId, List<OrderItem> orderItems);
 
-    Task<Order> RemoveOrderItemAsync(int orderId, int orderItemId);
+    Task<Order> RemoveOrderItemAsync(Guid orderId, Guid orderItemId);
 }

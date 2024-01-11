@@ -5,7 +5,7 @@ namespace PulseActiveShop.Api.Entities
     public class ProductDetails
     {
         [Required]
-        public int? ProductId {  get; set; }
+        public Guid ProductId {  get; set; }
 
         [Required]
         public string Name { get; set; } = null!;

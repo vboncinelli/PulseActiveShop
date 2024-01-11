@@ -1,6 +1,8 @@
 ﻿CREATE TABLE [dbo].[Basket] (
-    [Id]         INT IDENTITY (1, 1) NOT NULL,
-    [CustomerId] INT NOT NULL,
+    [Id]         UNIQUEIDENTIFIER DEFAULT (newid()) NOT NULL,
+    [CustomerId] UNIQUEIDENTIFIER NOT NULL,
     CONSTRAINT [PK_Basket] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+
 

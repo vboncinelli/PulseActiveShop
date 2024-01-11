@@ -27,7 +27,7 @@ namespace PulseActiveShop.Application.Services
             this._uriComposer = uriComposer ?? throw new ArgumentNullException(nameof(uriComposer));
         }
 
-        public async Task<Order?> GetOrderAsync(int orderId)
+        public async Task<Order?> GetOrderAsync(Guid orderId)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace PulseActiveShop.Application.Services
             }
         }
 
-        public async Task<OrderCollection> GetCustomerOrdersAsync(int customerId, int page = 1, int pageSize = 25)
+        public async Task<OrderCollection> GetCustomerOrdersAsync(Guid customerId, int page = 1, int pageSize = 25)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace PulseActiveShop.Application.Services
             }
         }
 
-        public async Task CreateOrderAsync(int basketId, Address shippingAddress)
+        public async Task CreateOrderAsync(Guid basketId, Address shippingAddress)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace PulseActiveShop.Application.Services
             }
         }
 
-        public async Task<Order> AddOrderItemsAsync(int orderId, List<OrderItem> orderItems)
+        public async Task<Order> AddOrderItemsAsync(Guid orderId, List<OrderItem> orderItems)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace PulseActiveShop.Application.Services
             }
         }
 
-        public async Task<Order> RemoveOrderItemAsync(int orderId, int orderItemId)
+        public async Task<Order> RemoveOrderItemAsync(Guid orderId, Guid orderItemId)
         {
             try
             {

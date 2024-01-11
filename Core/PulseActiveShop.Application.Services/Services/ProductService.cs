@@ -23,7 +23,7 @@ namespace PulseActiveShop.Application.Services
             this._productTypeRepository = productTypeRepository ?? throw new ArgumentNullException(nameof(productTypeRepository));
         }
 
-        public async Task<Product?> FindProductAsync(int id)
+        public async Task<Product?> FindProductAsync(Guid id)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace PulseActiveShop.Application.Services
             }
         }
 
-        public async Task<Product> UpdateProductDetailsAsync(int productId, ProductDetails productDetails)
+        public async Task<Product> UpdateProductDetailsAsync(Guid productId, ProductDetails productDetails)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace PulseActiveShop.Application.Services
             }
         }
 
-        public async Task<Product> UpdateProductBrandAsync(int productId, int brandId)
+        public async Task<Product> UpdateProductBrandAsync(Guid productId, Guid brandId)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace PulseActiveShop.Application.Services
             }
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             try
             {

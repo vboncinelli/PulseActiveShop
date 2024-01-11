@@ -5,7 +5,7 @@ namespace PulseActiveShop.Core.Entities
 {
     public class Order : BaseEntity, IAggregateRoot
     {
-        public int CustomerId { get; private set; }
+        public Guid CustomerId { get; private set; }
 
         public DateTime OrderDate { get; private set; } = DateTime.UtcNow;
 
@@ -19,7 +19,7 @@ namespace PulseActiveShop.Core.Entities
 
         }
 
-        public Order(int customerId, Address shipToAddress, List<OrderItem> orderItems)
+        public Order(Guid customerId, Address shipToAddress, List<OrderItem> orderItems)
         {
             this.CustomerId = customerId;
             this.ShipToAddress = shipToAddress;
@@ -55,7 +55,7 @@ namespace PulseActiveShop.Core.Entities
             }
         }
         
-        public void RemoveOrderItem(int orderItemId)
+        public void RemoveOrderItem(Guid orderItemId)
         {
             var existingItemIndex = this.OrderItems.FindIndex(e => e.Id == orderItemId);
 

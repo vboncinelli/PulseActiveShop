@@ -19,7 +19,7 @@ namespace PulseActiveShop.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> FindProductAsync(int id)
+        public async Task<IActionResult> FindProductAsync(Guid id)
         {
             try
             {
@@ -39,13 +39,13 @@ namespace PulseActiveShop.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync([FromQuery] int page = 1, [FromQuery] int pageSize = 25)
+        public async Task<List<Product>> GetAllAsync([FromQuery] int page = 1, [FromQuery] int pageSize = 25)
         {
             try
             {
                 var products = await this._productService.GetAllProductsAsync(page, pageSize);
 
-                return Ok(products);
+                return products.ToApi();
             }
             catch (Exception ex)
             {
@@ -73,13 +73,13 @@ namespace PulseActiveShop.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateDetailsAsync([FromBody] ProductDetails details)
+        public async Task<Product?> UpdateDetailsAsync([FromBody] ProductDetails details)
         {
             try
             {
-                var updatedProduct = await this._productService.UpdateProductDetailsAsync(details.ProductId!.Value, details.ToDomain());
+                var updatedProduct = await this._productService.UpdateProductDetailsAsync(details.ProductId, details.ToDomain());
 
-                return Ok(updatedProduct);
+                return updatedProduct.ToApi();
             }
             catch (Exception ex)
             {
@@ -90,13 +90,11 @@ namespace PulseActiveShop.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             try
             {
                 await this._productService.DeleteAsync(id);
-
-                return Ok();
             }
             catch (Exception ex)
             {

@@ -4,7 +4,7 @@ namespace PulseActiveShop.Api.Entities
 {
     public class Basket : BaseApiEntity
     {
-        public string? CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
 
         public List<BasketItem> Items { get; set;} = new List<BasketItem>();
     }

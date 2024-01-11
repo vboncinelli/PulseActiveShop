@@ -48,6 +48,8 @@ namespace PulseActiveShop.Dal.Sql.Repositories
                 pictureUri: dalEntity.PictureUri,
                 price: dalEntity.Price);
 
+            entity.Id = dalEntity.Id;
+
             return entity;
         } 
         #endregion

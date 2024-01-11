@@ -2,7 +2,7 @@
 {
     public abstract class BaseApiEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 
     public abstract class BaseApiEntityCollection<TEntity> : List<TEntity>

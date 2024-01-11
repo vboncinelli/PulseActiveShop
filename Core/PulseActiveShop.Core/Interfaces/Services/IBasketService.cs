@@ -4,11 +4,15 @@ namespace PulseActiveShop.Core.Interfaces.Services;
 
 public interface IBasketService
 {
-    Task TransferBasketAsync(string anonymousId, string userName);
+    Task<Basket?> FindBasketByCustomerNameAsync(string customerName);
 
-    Task<Basket> AddItemToBasket(string username, int catalogItemId, decimal price, int quantity = 1);
+    Task<Basket?> FindBasketByCustomerIdAsync(Guid customerId);
 
-    Task SetQuantities(int basketId, Dictionary<string, int> quantities);
+    Task<Basket> TransferBasketAsync(Guid anonymousId, Guid userId);
 
-    Task DeleteBasketAsync(int basketId);
+    Task<Basket> AddItemToBasketAsync(Guid userId, Guid catalogItemId, decimal price, int quantity = 1);
+
+    Task<Basket> SetQuantitiesAsync(Guid basketId, Dictionary<string, int> quantities);
+
+    Task DeleteBasketAsync(Guid basketId);
 }
